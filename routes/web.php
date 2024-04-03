@@ -9,7 +9,9 @@ Route::get('testing', function(){
     return \App\Models\Blog::with('posts')->get();
 });
 
-Route::resource('posts', \App\Http\Controllers\PostController::class);
+Route::resource('posts', \App\Http\Controllers\PostController::class)->only([
+    'index', 'show'
+]);
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])

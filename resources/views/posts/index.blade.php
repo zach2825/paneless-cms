@@ -7,7 +7,9 @@
         <ul>
             @foreach($posts as $post)
             <li>
-                <a href="{{ route('posts.show', $post) }}" class="post-title">{{ $post->title }}</a>
+                <x-nav-link :href="route('posts.show', $post)" :active="request()->routeIs('posts.show')" wire:navigate>
+                    {{ $post->title }}
+                </x-nav-link>
             </li>
             @endforeach
         </ul>
