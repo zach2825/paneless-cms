@@ -66,15 +66,15 @@ The filename should follow the format `YYYY-MM-DD-your-article-title.md`.
 
 Example:
 
-    ```shell
-    content/posts/2024-04-03-my-first-blog-post.md
-    ```
+```shell
+content/posts/2024-04-03-my-first-blog-post.md
+```
 
 But you can use the command
 
-    ```shell
-    php artisan orbit:generate
-    ```
+```shell
+php artisan orbit:generate
+```
 
 ## Contributing
 
