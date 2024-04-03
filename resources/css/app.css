@@ -5,3 +5,34 @@
 .main-content{
     @apply mt-[5rem];
 }
+
+
+body {
+    font-family: 'Figtree', sans-serif;
+}
+.main-content {
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+.blog-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+.blog-post {
+    margin-bottom: 2rem;
+}
+.post-title {
+    font-size: 1.75rem;
+    font-weight: 500;
+}
+.post-date {
+    color: #6B7280;
+    font-size: 0.875rem;
+}
+.post-content {
+    margin-top: 1rem;
+    line-height: 1.6;
+}

@@ -1,6 +1,6 @@
 <x-guest-layout>
     <header class="blog-title">
-        Welcome to My Blog Posts
+        My Blog Posts
     </header>
 
     <article class="blog-post">
@@ -11,4 +11,5 @@
             </li>
             @endforeach
         </ul>
+    </article>
 </x-guest-layout>
