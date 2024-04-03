@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Str;
@@ -15,6 +14,8 @@ class Blog extends Model
 
     public static $driver = 'md';
 
+    public $incrementing = false;
+
     protected $fillable = ['title', 'slug', 'published_at'];
 
     protected $casts = [
@@ -22,21 +23,6 @@ class Blog extends Model
     ];
 
     protected $appends = ['body'];
-
-    public $incrementing = false;
-
-    protected static function booted()
-    {
-        parent::booted();
-
-        static::saving(function (self $blog) {
-            $blog->slug = Str::slug($blog->title);
-
-            if(!$blog->published_at) {
-                $blog->published_at = now();
-            }
-        });
-    }
 
     public static function schema(Blueprint $table)
     {
@@ -63,5 +49,18 @@ class Blog extends Model
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    protected static function booted()
+    {
+        parent::booted();
+
+        static::saving(function (self $blog) {
+            $blog->slug = Str::slug($blog->title);
+
+            if ( ! $blog->published_at) {
+                $blog->published_at = now();
+            }
+        });
     }
 }

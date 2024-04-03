@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Str;
@@ -10,15 +9,17 @@ use Orbit\Concerns\Orbital;
 use Orbit\Concerns\SoftDeletes;
 
 /**
- *  @property string $title
- *  @property string $slug
- *  @property string $published_at
+ * @property string $title
+ * @property string $slug
+ * @property string $published_at
  */
 class Post extends Model
 {
     use Orbital, SoftDeletes;
 
     public static $driver = 'md';
+
+    public $incrementing = false;
 
     protected $fillable = ['title', 'slug', 'published_at'];
 
@@ -27,21 +28,6 @@ class Post extends Model
     ];
 
     protected $appends = ['body'];
-
-    public $incrementing = false;
-
-    protected static function booted()
-    {
-        parent::booted();
-
-        static::saving(function (self $post) {
-            $post->slug = Str::slug($post->title);
-
-            if(!$post->published_at) {
-                $post->published_at = now();
-            }
-        });
-    }
 
     public static function schema(Blueprint $table)
     {
@@ -64,5 +50,18 @@ class Post extends Model
     public function getIncrementing()
     {
         return false;
+    }
+
+    protected static function booted()
+    {
+        parent::booted();
+
+        static::saving(function (self $post) {
+            $post->slug = Str::slug($post->title);
+
+            if ( ! $post->published_at) {
+                $post->published_at = now();
+            }
+        });
     }
 }
